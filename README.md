@@ -1,33 +1,64 @@
-**IMPORTANT**: You need to follow the steps below to get started:
-
-- [ ] Update the `action.yaml` with the correct data (i.e. Name of project, inputs, outputs etc.)
-- [ ] Update the `package.json` with the correct name, version, etc.
-- [ ] Update the `README.md` with the correct information & documentation.
-- [ ] Add Unit Tests and remove `--passWithNoTests` argument in then `"scripts"` section of the `package.json`.
-
-# blueprint-action-typescript
+# SSL/TLS Monitor
 
 [![CI](https://github.com/bluenovaio/action-tls-monitor/actions/workflows/ci.yaml/badge.svg)](https://github.com/bluenovaio/action-tls-monitor/actions/workflows/ci.yaml)
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/standard/semistandard)
 
-Template repository for TypeScript Github Actions.
+Monitor SSL/TLS certificates for your domains.
 
 ## Usage
-> Update the following to give a quick C&P example that developers can use.
 
+You can run against a single domain or use the matrix strategy to run against multiple domains.
+
+**Single Domain**
 ```yaml
-name: Example Action 
+name: SSL/TLS Monitor 
 on:
-  push
+  schedule:
+    - cron: "0 16 * * *"
 
 jobs:
-  testJob:
-    name: Test
+  monitor:
+    name: SSL/TLS Monitor
     runs-on: ubuntu-latest
     steps:
-      - run: <YOUR-ACTION> 
+      - name: Monitor
+        uses: bluenovaio/action-tls-monitor@main
+        with: 
+          domain: bluenova.io
+          expiration_days: 30
+          approved_protocols: TLSv1.2,TLSv1.3
+          alert_method: slack
+          alert_token: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
 
-#### Attribution
+**Multiple Domains**
+```yaml
+name: SSL/TLS Monitor 
+on:
+  schedule:
+    - cron: "0 16 * * *"
 
-The OSS policies in this repository are based on [this](https://github.com/auth0/open-source-template) repo by Auth0.
+jobs:
+  monitor:
+    name: SSL/TLS Monitor
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        domain:
+          - bluenova.io
+          - docs.bluenova.io
+    steps:
+      - name: Monitor - ${{ matrix.domain }}
+        uses: bluenovaio/action-tls-monitor@main
+        with:
+          domain: ${{ matrix.domain }}
+          expiration_days: 30
+          approved_protocols: TLSv1.2,TLSv1.3
+          alert_method: slack
+          alert_token: ${{ secrets.SLACK_WEBHOOK_URL }}
+```
+
+## Alerting
+
+Alerting is built in to this action but its also possible to just use the outputs to send your own alerts or do
+another action (i.e. trigger a certificate update/renewal). Currently, only [slack](https://slack.com) is supported.

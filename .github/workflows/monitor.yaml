@@ -23,3 +23,4 @@ jobs:
           approved_protocols: TLSv1.2,TLSv1.3
           alert_method: slack
           alert_token: ${{ secrets.SLACK_WEBHOOK_URL_OPS }}
+
