@@ -9,7 +9,8 @@ Monitor SSL/TLS certificates for your domains.
 
 You can run against a single domain or use the matrix strategy to run against multiple domains.
 
-**Single Domain**
+#### Single Domain
+
 ```yaml
 name: SSL/TLS Monitor 
 on:
@@ -31,7 +32,8 @@ jobs:
           alert_token: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
 
-**Multiple Domains**
+#### Multiple Domains
+
 ```yaml
 name: SSL/TLS Monitor 
 on:
