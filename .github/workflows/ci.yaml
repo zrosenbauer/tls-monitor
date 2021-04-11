@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v1
-      - name: Use Node.js v14
+      - name: Use Node.js v12
         uses: actions/setup-node@v1
         with:
           node-version: 12
