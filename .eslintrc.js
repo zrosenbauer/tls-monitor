@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: [
-    '@typescript-eslint',
+    '@typescript-eslint'
   ],
   extends: [
     'eslint:recommended',
@@ -16,5 +16,7 @@ module.exports = {
   ],
   rules: {
     '@typescript-eslint/no-unused-vars': 0,
+    'no-unused-vars': 0,
+    'space-before-function-paren': 0
   }
 };
