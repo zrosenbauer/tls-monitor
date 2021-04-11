@@ -19,8 +19,8 @@ jobs:
         uses: bluenovaio/action-tls-monitor@main
         with:
           domain: ${{ matrix.domain }}
-          expiration_days: 30
-          approved_protocols: TLSv1.2,TLSv1.3
+          expiration_days: "1000"
+          approved_protocols: TLSv1.1
           alert_method: slack
           alert_token: ${{ secrets.SLACK_WEBHOOK_URL_OPS }}
 
