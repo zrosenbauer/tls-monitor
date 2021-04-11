@@ -1,9 +1,9 @@
 {
-  "name": "blueprint-action-typescript",
+  "name": "action-tls-monitor",
   "version": "1.0.0",
-  "description": "Template repository for TypeScript Github Actions",
+  "description": "Monitor SSL/TLS certificates for your domains.",
   "main": "dist/main.js",
-  "repository": "git@github.com:bluenovaio/blueprint-action-typescript.git",
+  "repository": "git@github.com:bluenovaio/action-tls-monitor.git",
   "author": "@bluenovaio",
   "license": "MIT",
   "private": false,
@@ -13,7 +13,7 @@
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
-    "test": "jest --passWithNoTests"
+    "test": "jest"
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
