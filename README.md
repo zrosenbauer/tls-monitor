@@ -70,4 +70,8 @@ another action (i.e. trigger a certificate update/renewal).
 Slack is supported out of the box. The alerts are formatted and have a default emoji and name. You should start to see alerts 
 similar to the below image if an issue is found.
 
+<details><summary>Slack Alert Example</summary>
+
 ![Slack Alert](/docs/images/alert-slack.png)
+
+</details>
