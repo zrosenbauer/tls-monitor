@@ -1,0 +1,25 @@
+name: SSL/TLS Monitor
+
+on:
+  schedule:
+    - cron: "0 16 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  monitor:
+    name: SSL/TLS Monitor
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        domain:
+          - bluenova.io
+          - docs.bluenova.io
+    steps:
+      - name: Monitor - ${{ matrix.domain }}
+        uses: bluenovaio/action-tls-monitor@main
+        with:
+          domain: ${{ matrix.domain }}
+          expiration_days: 30
+          approved_protocols: TLSv1.2,TLSv1.3
+          alert_method: slack
+          alert_token: ${{ secrets.SLACK_WEBHOOK_URL_OPS }}
