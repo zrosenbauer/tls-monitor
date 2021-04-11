@@ -9,7 +9,8 @@ Monitor SSL/TLS certificates for your domains.
 
 You can run against a single domain or use the matrix strategy to run against multiple domains.
 
-**Single Domain**
+#### Single Domain
+
 ```yaml
 name: SSL/TLS Monitor 
 on:
@@ -31,7 +32,8 @@ jobs:
           alert_token: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
 
-**Multiple Domains**
+#### Multiple Domains
+
 ```yaml
 name: SSL/TLS Monitor 
 on:
@@ -60,5 +62,16 @@ jobs:
 
 ## Alerting
 
-Alerting is built in to this action but its also possible to just use the outputs to send your own alerts or do
-another action (i.e. trigger a certificate update/renewal). Currently, only [slack](https://slack.com) is supported.
+Alerting is built in to this action. It is also possible to ignore the alerts and use the outputs to send your own alerts or do
+another action (i.e. trigger a certificate update/renewal). 
+
+### Slack Alerts
+
+Slack is supported out of the box. The alerts are formatted and have a default emoji and name. You should start to see alerts 
+similar to the below image if an issue is found.
+
+<details><summary>Slack Alert Example</summary>
+
+![Slack Alert](/docs/images/alert-slack.png)
+
+</details>
