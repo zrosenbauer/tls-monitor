@@ -21,11 +21,11 @@ describe('getTLSInfo', () => {
         commonName: 'www.example.org'
       },
       protocol: 'TLSv1.2',
-      validFrom: expect.any(Number),
-      validTo: expect.any(Number),
+      validFrom: expect.any(Date),
+      validTo: expect.any(Date),
     });
 
-    expect(result.validFrom).toBeLessThan(Date.now());
-    expect(result.validTo).toBeGreaterThan(Date.now());
+    expect(result.validFrom.getTime()).toBeLessThan(Date.now());
+    expect(result.validTo.getTime()).toBeGreaterThan(Date.now());
   });
 });
