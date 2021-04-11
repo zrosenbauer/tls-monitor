@@ -1,6 +1,6 @@
 name: SSL/TLS Monitor
 description: Monitor SSL/TLS certificates for your domains.
-author: @bluenovaio
+author: "@bluenovaio"
 inputs:
   domain:
     description: The domain to monitor, i.e. example.com.
