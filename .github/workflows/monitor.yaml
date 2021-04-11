@@ -1,8 +1,8 @@
 name: SSL/TLS Monitor
+
 on:
   schedule:
     - cron: "0 16 * * *"
-
   workflow_dispatch: {}
 
 jobs:
