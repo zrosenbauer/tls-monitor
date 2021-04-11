@@ -1,8 +1,36 @@
-name: blueprint-action-typescript
-description: Template repository for TypeScript Github Actions.
+name: SSL/TLS Monitor
+description: Monitor SSL/TLS certificates for your domains.
 author: @bluenovaio
-inputs: {}
-outputs: {}
+inputs:
+  domain:
+    description: The domain to monitor, i.e. example.com.
+    required: true
+  expiration_days:
+    description: The number of days prior to expiration to trigger an alert, MUST be a valid integer.
+    default: "7"
+    required: false
+  approved_protocols:
+    description: (Optional) A common separted list of supported protocols, MUST be one of - SSLv3,TLSv1,TLSv1.1,TLSv1.2,TLSv1.3.
+    default: TLSv1.2,TLSv1.3
+    required: false
+  alert_method:
+    description: (Optional) Any detected issues will be alerted to this remote system (alert_method), MUST be one of - slack.
+    required: false
+  alert_token:
+    description: The API token or Webhook URL used to alert the remote system (alert_method).
+    required: false
+outputs:
+  protocol:
+    description: A common separted list of supported protocols - SSLv3, TLSv1, TLSv1.1, TLSv1.2 or TLSv1.3.
+  valid_to:
+    description: The validTo date for the certificate in ISO-8601 format (i.e. 2021-01-01T10:20:11Z).
+  valid_from:
+    description: The validFrom date for the certificate in ISO-8601 format (i.e. 2021-01-01T10:20:11Z).
+  error_message:
+    description: A short description of the issue if an issue is found.
 runs:
   using: node12
   main: dist/index.js
+branding:
+  color: blue
+  icon: alert-triangle
