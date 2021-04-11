@@ -14,7 +14,7 @@ You can run against a single domain or use the matrix strategy to run against mu
 name: SSL/TLS Monitor 
 on:
   schedule:
-    - 
+    - cron: "0 16 * * *"
 
 jobs:
   monitor:
@@ -36,7 +36,7 @@ jobs:
 name: SSL/TLS Monitor 
 on:
   schedule:
-    - 
+    - cron: "0 16 * * *"
 
 jobs:
   monitor:
