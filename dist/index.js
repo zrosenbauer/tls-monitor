@@ -231,11 +231,11 @@ function validate(input) {
         errors.push(`Invalid protocol: ${input.tlsInfo.protocol || 'unknown'}`);
         protocolNotApproved = true;
     }
-    if (input.tlsInfo.validTo.getTime() < Date.now()) {
+    if (input.tlsInfo.validTo.getTime() <= Date.now()) {
         errors.push('Certificate has expired');
         expired = true;
     }
-    if (getDaysBetweenDates(new Date(), input.tlsInfo.validTo) <= input.expirationDays) {
+    if (getDaysBetweenDates(input.tlsInfo.validTo, new Date()) <= input.expirationDays) {
         errors.push(`Certificate will expire in less than ${input.expirationDays} days`);
         expiresSoon = true;
     }
