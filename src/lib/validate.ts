@@ -13,7 +13,7 @@ interface ValidationResult {
   errorMessage: string | null;
 }
 
-function getDaysBetweenDates (date1: Date, date2: Date) {
+export function getDaysBetweenDates (date1: Date, date2: Date): number {
   const difference = date1.getTime() - date2.getTime();
   return Math.ceil(difference / (1000 * 60 * 60 * 24));
 }
@@ -34,7 +34,7 @@ export function validate (input: ValidationInput): ValidationResult {
     expired = true;
   }
 
-  if (getDaysBetweenDates(input.tlsInfo.validTo, new Date()) <= input.expirationDays) {
+  if (!expired && getDaysBetweenDates(input.tlsInfo.validTo, new Date()) <= input.expirationDays) {
     errors.push(`Certificate will expire in less than ${input.expirationDays} days`);
     expiresSoon = true;
   }
@@ -43,6 +43,6 @@ export function validate (input: ValidationInput): ValidationResult {
     expired,
     expiresSoon,
     protocolNotApproved,
-    errorMessage: errors.length ? `Issues found with certificate: ${errors.join(', ')}` : null
+    errorMessage: errors.length ? `Issues found with certificate - ${errors.join(', ')}` : null
   };
 }

@@ -1,8 +1,8 @@
-import { IncomingWebhook } from '@slack/webhook';
+import { IncomingWebhook, IncomingWebhookSendArguments } from '@slack/webhook';
 
 import { AlertInput } from './types';
 
-function buildMessage (input: AlertInput) {
+export function buildMessage (input: AlertInput): IncomingWebhookSendArguments {
   return {
     icon_emoji: ':warning:',
     username: 'SSL/TLS Monitor',
