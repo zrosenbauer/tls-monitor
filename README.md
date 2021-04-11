@@ -61,4 +61,4 @@ jobs:
 ## Alerting
 
 Alerting is built in to this action but its also possible to just use the outputs to send your own alerts or do
-another action (i.e. trigger a certificate update/renewal). Currently, only (slack)[https://slack.com] is supported.
+another action (i.e. trigger a certificate update/renewal). Currently, only [slack](https://slack.com) is supported.
