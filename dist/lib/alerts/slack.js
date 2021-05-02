@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.send = void 0;
+exports.send = exports.buildMessage = void 0;
 const webhook_1 = require("@slack/webhook");
 function buildMessage(input) {
     return {
@@ -48,6 +48,7 @@ function buildMessage(input) {
         ]
     };
 }
+exports.buildMessage = buildMessage;
 async function send(webhookUrl, input) {
     const webhook = new webhook_1.IncomingWebhook(webhookUrl);
     await webhook.send(buildMessage(input));

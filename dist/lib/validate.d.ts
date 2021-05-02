@@ -10,5 +10,6 @@ interface ValidationResult {
     protocolNotApproved: boolean;
     errorMessage: string | null;
 }
+export declare function getDaysBetweenDates(date1: Date, date2: Date): number;
 export declare function validate(input: ValidationInput): ValidationResult;
 export {};
