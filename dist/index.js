@@ -47,7 +47,7 @@ exports.send = send;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.send = void 0;
+exports.send = exports.buildMessage = void 0;
 const webhook_1 = __nccwpck_require__(1095);
 function buildMessage(input) {
     return {
@@ -95,6 +95,7 @@ function buildMessage(input) {
         ]
     };
 }
+exports.buildMessage = buildMessage;
 async function send(webhookUrl, input) {
     const webhook = new webhook_1.IncomingWebhook(webhookUrl);
     await webhook.send(buildMessage(input));
@@ -217,11 +218,12 @@ exports.getTLSInfo = getTLSInfo;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.validate = void 0;
+exports.validate = exports.getDaysBetweenDates = void 0;
 function getDaysBetweenDates(date1, date2) {
     const difference = date1.getTime() - date2.getTime();
     return Math.ceil(difference / (1000 * 60 * 60 * 24));
 }
+exports.getDaysBetweenDates = getDaysBetweenDates;
 function validate(input) {
     const errors = [];
     let protocolNotApproved = false;
@@ -235,7 +237,7 @@ function validate(input) {
         errors.push('Certificate has expired');
         expired = true;
     }
-    if (getDaysBetweenDates(input.tlsInfo.validTo, new Date()) <= input.expirationDays) {
+    if (!expired && getDaysBetweenDates(input.tlsInfo.validTo, new Date()) <= input.expirationDays) {
         errors.push(`Certificate will expire in less than ${input.expirationDays} days`);
         expiresSoon = true;
     }
@@ -243,7 +245,7 @@ function validate(input) {
         expired,
         expiresSoon,
         protocolNotApproved,
-        errorMessage: errors.length ? `Issues found with certificate: ${errors.join(', ')}` : null
+        errorMessage: errors.length ? `Issues found with certificate - ${errors.join(', ')}` : null
     };
 }
 exports.validate = validate;
@@ -21910,7 +21912,7 @@ module.exports = {
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"action-tls-monitor","version":"1.0.0","description":"Monitor SSL/TLS certificates for your domains.","main":"dist/main.js","repository":"git@github.com:bluenovaio/action-tls-monitor.git","author":"@bluenovaio","license":"MIT","private":false,"scripts":{"build":"tsc","format":"prettier --write **/*.ts","format-check":"prettier --check **/*.ts","lint":"eslint src/**/*.ts","package":"ncc build --source-map --license licenses.txt","test":"jest"},"dependencies":{"@actions/core":"^1.2.6","@slack/webhook":"^6.0.0","gaxios":"^4.2.0","lodash":"^4.17.21"},"devDependencies":{"@jest/types":"^26.6.2","@types/jest":"^26.0.20","@types/lodash":"^4.14.168","@types/node":"^14.14.35","@typescript-eslint/eslint-plugin":"^4.16.1","@typescript-eslint/parser":"^4.17.0","@vercel/ncc":"0.28.2","eslint":"^7.22.0","eslint-config-semistandard":"^15.0.1","eslint-config-standard":"^16.0.2","eslint-plugin-import":"^2.22.1","eslint-plugin-node":"^11.1.0","eslint-plugin-promise":"5.1.0","eslint-plugin-standard":"^5.0.0","jest":"^26.6.3","prettier":"^2.2.1","ts-jest":"^26.5.3","ts-node":"^9.1.1","typescript":"^4.2.3","webpack":"^5.31.2"}}');
+module.exports = JSON.parse('{"name":"action-tls-monitor","version":"1.0.0","description":"Monitor SSL/TLS certificates for your domains.","main":"dist/main.js","repository":"git@github.com:bluenovaio/action-tls-monitor.git","author":"@bluenovaio","license":"MIT","private":false,"scripts":{"build":"tsc","format":"prettier --write **/*.ts","format-check":"prettier --check **/*.ts","lint":"eslint src/**/*.ts","package":"ncc build --source-map --license licenses.txt","test":"jest"},"dependencies":{"@actions/core":"^1.2.7","@slack/webhook":"^6.0.0","gaxios":"^4.2.0","lodash":"^4.17.21"},"devDependencies":{"@jest/types":"^26.6.2","@types/jest":"^26.0.20","@types/lodash":"^4.14.168","@types/node":"^15.0.1","@typescript-eslint/eslint-plugin":"^4.22.0","@typescript-eslint/parser":"^4.22.0","@vercel/ncc":"0.28.4","eslint":"^7.25.0","eslint-config-semistandard":"^15.0.1","eslint-config-standard":"^16.0.2","eslint-plugin-import":"^2.22.1","eslint-plugin-node":"^11.1.0","eslint-plugin-promise":"5.1.0","eslint-plugin-standard":"^5.0.0","jest":"^26.6.3","prettier":"^2.2.1","ts-jest":"^26.5.5","ts-node":"^9.1.1","typescript":"^4.2.3","webpack":"^5.36.2"}}');
 
 /***/ }),
 
