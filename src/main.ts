@@ -16,31 +16,41 @@ async function run() {
   const alertToken = core.getInput('alert_token');
   const isAlertEnabled = !!alertMethod;
 
-  const result = await tls.getTLSInfo(domain);
   let errorMessage = '';
+  let result;
+  try {
+    result = await tls.getTLSInfo(domain);
+  } catch (err) {
+    errorMessage = err.message || `Unable to get TLS Info for domain ${domain}`;
+  }
 
   if (isAlertEnabled) {
-    const validationResults = validate({
-      expirationDays: Number(expirationDays),
-      approvedProtocols: getApprovedProtocols(approvedProtocols),
-      tlsInfo: result
-    });
+    if (result) {
+      const validationResults = validate({
+        expirationDays: Number(expirationDays),
+        approvedProtocols: getApprovedProtocols(approvedProtocols),
+        tlsInfo: result
+      });
 
-    if (validationResults.errorMessage) {
-      errorMessage = validationResults.errorMessage;
+      if (validationResults.errorMessage) {
+        errorMessage = validationResults.errorMessage;
+      }
+    }
+
+    if (errorMessage) {
       await alerts.send(alertMethod as alerts.AlertMethod, alertToken, {
         domain,
-        validTo: result.validTo.toISOString(),
-        validFrom: result.validFrom.toISOString(),
-        protocol: result.protocol as tls.Protocol,
+        validTo: result?.validTo.toISOString() || 'unknown',
+        validFrom: result?.validFrom.toISOString() || 'unknown',
+        protocol: (result?.protocol || 'unknown') as tls.Protocol,
         errorMessage
       });
     }
   }
 
-  core.setOutput('protocol', result.protocol);
-  core.setOutput('valid_to', result.validTo);
-  core.setOutput('valid_from', result.validFrom);
+  core.setOutput('protocol', result?.protocol || 'unknown');
+  core.setOutput('valid_to', result?.validTo || 'unknown');
+  core.setOutput('valid_from', result?.validFrom || 'unknown');
   core.setOutput('error_message', errorMessage);
 }
 
