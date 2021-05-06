@@ -36,10 +36,24 @@ jobs:
       - id: runActionInvalid
         name: Try Invalid URL
         uses: ./
+        with:
+          domain: https://not-a-real-domain-at-all-1382712984.com
+          expiration_days: 7
+      - id: runActionInvalid
+        name: Try Invalid URL
+        uses: ./
         continue-on-error: true
         with:
           domain: https://not-a-real-domain-at-all-1382712984.com
           expiration_days: 7
+      - run: echo ${{ steps.runActionInvalid.outputs.error_message }}
+      - id: runActionInvalid2
+        name: "Try Invalid URL from #24"
+        uses: ./
+        with:
+          domain: deleteonerror.com
+          expiration_days: 7
+      - run: echo ${{ steps.runActionInvalid2.outputs.error_message }}
       - id: invalidActionStatus
         name: Invalid URL Status
         if: steps.runActionInvalid.outputs.error_message == ''
