@@ -27,9 +27,19 @@ jobs:
         run: yarn lint
       - name: Test
         run: yarn test
-
-        ## You can add the action in if you need / want to test it
-
-#      - id: runAction
-#        name: Run Action Code
-#        uses: ./
+      - id: runActionValid
+        name: Try Valid URL
+        uses: ./
+        with:
+          domain: https://bluenova.io
+          expiration_days: 7
+      - id: runActionInvalid
+        name: Try Invalid URL
+        uses: ./
+        with:
+          domain: https://not-a-real-domain-at-all-1382712984.com
+          expiration_days: 7
+      - id: invalidActionStatus
+        name: Invalid URL Status
+        if: steps.runActionInvalid.outputs.error_message == ''
+        run: exit 1
