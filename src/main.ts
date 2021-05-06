@@ -4,11 +4,11 @@ import * as alerts from './lib/alerts/main';
 import { validate } from './lib/validate';
 import * as tls from './lib/tls';
 
-function getApprovedProtocols (approvedProtocols: string) {
+function getApprovedProtocols(approvedProtocols: string) {
   return approvedProtocols.split(',') as tls.Protocol[];
 }
 
-async function run () {
+async function run() {
   const domain = core.getInput('domain');
   const expirationDays = core.getInput('expiration_days');
   const approvedProtocols = core.getInput('approved_protocols');
