@@ -292,28 +292,38 @@ async function run() {
     const alertMethod = core.getInput('alert_method');
     const alertToken = core.getInput('alert_token');
     const isAlertEnabled = !!alertMethod;
-    const result = await tls.getTLSInfo(domain);
     let errorMessage = '';
+    let result;
+    try {
+        result = await tls.getTLSInfo(domain);
+    }
+    catch (err) {
+        errorMessage = err.message || `Unable to get TLS Info for domain ${domain}`;
+    }
     if (isAlertEnabled) {
-        const validationResults = validate_1.validate({
-            expirationDays: Number(expirationDays),
-            approvedProtocols: getApprovedProtocols(approvedProtocols),
-            tlsInfo: result
-        });
-        if (validationResults.errorMessage) {
-            errorMessage = validationResults.errorMessage;
+        if (result) {
+            const validationResults = validate_1.validate({
+                expirationDays: Number(expirationDays),
+                approvedProtocols: getApprovedProtocols(approvedProtocols),
+                tlsInfo: result
+            });
+            if (validationResults.errorMessage) {
+                errorMessage = validationResults.errorMessage;
+            }
+        }
+        if (errorMessage) {
             await alerts.send(alertMethod, alertToken, {
                 domain,
-                validTo: result.validTo.toISOString(),
-                validFrom: result.validFrom.toISOString(),
-                protocol: result.protocol,
+                validTo: (result === null || result === void 0 ? void 0 : result.validTo.toISOString()) || 'unknown',
+                validFrom: (result === null || result === void 0 ? void 0 : result.validFrom.toISOString()) || 'unknown',
+                protocol: (result === null || result === void 0 ? void 0 : result.protocol) || 'unknown',
                 errorMessage
             });
         }
     }
-    core.setOutput('protocol', result.protocol);
-    core.setOutput('valid_to', result.validTo);
-    core.setOutput('valid_from', result.validFrom);
+    core.setOutput('protocol', (result === null || result === void 0 ? void 0 : result.protocol) || 'unknown');
+    core.setOutput('valid_to', (result === null || result === void 0 ? void 0 : result.validTo) || 'unknown');
+    core.setOutput('valid_from', (result === null || result === void 0 ? void 0 : result.validFrom) || 'unknown');
     core.setOutput('error_message', errorMessage);
 }
 run();
@@ -517,6 +527,7 @@ exports.getInput = getInput;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function setOutput(name, value) {
+    process.stdout.write(os.EOL);
     command_1.issueCommand('set-output', { name }, value);
 }
 exports.setOutput = setOutput;
@@ -3843,8 +3854,9 @@ var assert = __nccwpck_require__(2357);
 var debug = __nccwpck_require__(1133);
 
 // Create handlers that pass events from native requests
+var events = ["abort", "aborted", "connect", "error", "socket", "timeout"];
 var eventHandlers = Object.create(null);
-["abort", "aborted", "connect", "error", "socket", "timeout"].forEach(function (event) {
+events.forEach(function (event) {
   eventHandlers[event] = function (arg1, arg2, arg3) {
     this._redirectable.emit(event, arg1, arg2, arg3);
   };
@@ -3899,9 +3911,7 @@ RedirectableRequest.prototype = Object.create(Writable.prototype);
 
 RedirectableRequest.prototype.abort = function () {
   // Abort the internal request
-  this._currentRequest.removeAllListeners();
-  this._currentRequest.on("error", noop);
-  this._currentRequest.abort();
+  abortRequest(this._currentRequest);
 
   // Abort this request
   this.emit("abort");
@@ -3992,8 +4002,14 @@ RedirectableRequest.prototype.setTimeout = function (msecs, callback) {
     this.on("timeout", callback);
   }
 
+  function destroyOnTimeout(socket) {
+    socket.setTimeout(msecs);
+    socket.removeListener("timeout", socket.destroy);
+    socket.addListener("timeout", socket.destroy);
+  }
+
   // Sets up a timer to trigger a timeout event
-  function startTimer() {
+  function startTimer(socket) {
     if (self._timeout) {
       clearTimeout(self._timeout);
     }
@@ -4001,6 +4017,7 @@ RedirectableRequest.prototype.setTimeout = function (msecs, callback) {
       self.emit("timeout");
       clearTimer();
     }, msecs);
+    destroyOnTimeout(socket);
   }
 
   // Prevent a timeout from triggering
@@ -4016,12 +4033,13 @@ RedirectableRequest.prototype.setTimeout = function (msecs, callback) {
 
   // Start the timer when the socket is opened
   if (this.socket) {
-    startTimer();
+    startTimer(this.socket);
   }
   else {
     this._currentRequest.once("socket", startTimer);
   }
 
+  this.on("socket", destroyOnTimeout);
   this.once("response", clearTimer);
   this.once("error", clearTimer);
 
@@ -4100,11 +4118,8 @@ RedirectableRequest.prototype._performRequest = function () {
 
   // Set up event handlers
   request._redirectable = this;
-  for (var event in eventHandlers) {
-    /* istanbul ignore else */
-    if (event) {
-      request.on(event, eventHandlers[event]);
-    }
+  for (var e = 0; e < events.length; e++) {
+    request.on(events[e], eventHandlers[events[e]]);
   }
 
   // End a redirected request
@@ -4162,9 +4177,7 @@ RedirectableRequest.prototype._processResponse = function (response) {
   if (location && this._options.followRedirects !== false &&
       statusCode >= 300 && statusCode < 400) {
     // Abort the current request
-    this._currentRequest.removeAllListeners();
-    this._currentRequest.on("error", noop);
-    this._currentRequest.abort();
+    abortRequest(this._currentRequest);
     // Discard the remainder of the response to avoid waiting for data
     response.destroy();
 
@@ -4354,6 +4367,14 @@ function createErrorType(code, defaultMessage) {
   CustomError.prototype.name = "Error [" + code + "]";
   CustomError.prototype.code = code;
   return CustomError;
+}
+
+function abortRequest(request) {
+  for (var e = 0; e < events.length; e++) {
+    request.removeListener(events[e], eventHandlers[events[e]]);
+  }
+  request.on("error", noop);
+  request.abort();
 }
 
 // Exports

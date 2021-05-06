@@ -33,28 +33,38 @@ async function run() {
     const alertMethod = core.getInput('alert_method');
     const alertToken = core.getInput('alert_token');
     const isAlertEnabled = !!alertMethod;
-    const result = await tls.getTLSInfo(domain);
     let errorMessage = '';
+    let result;
+    try {
+        result = await tls.getTLSInfo(domain);
+    }
+    catch (err) {
+        errorMessage = err.message || `Unable to get TLS Info for domain ${domain}`;
+    }
     if (isAlertEnabled) {
-        const validationResults = validate_1.validate({
-            expirationDays: Number(expirationDays),
-            approvedProtocols: getApprovedProtocols(approvedProtocols),
-            tlsInfo: result
-        });
-        if (validationResults.errorMessage) {
-            errorMessage = validationResults.errorMessage;
+        if (result) {
+            const validationResults = validate_1.validate({
+                expirationDays: Number(expirationDays),
+                approvedProtocols: getApprovedProtocols(approvedProtocols),
+                tlsInfo: result
+            });
+            if (validationResults.errorMessage) {
+                errorMessage = validationResults.errorMessage;
+            }
+        }
+        if (errorMessage) {
             await alerts.send(alertMethod, alertToken, {
                 domain,
-                validTo: result.validTo.toISOString(),
-                validFrom: result.validFrom.toISOString(),
-                protocol: result.protocol,
+                validTo: (result === null || result === void 0 ? void 0 : result.validTo.toISOString()) || 'unknown',
+                validFrom: (result === null || result === void 0 ? void 0 : result.validFrom.toISOString()) || 'unknown',
+                protocol: (result === null || result === void 0 ? void 0 : result.protocol) || 'unknown',
                 errorMessage
             });
         }
     }
-    core.setOutput('protocol', result.protocol);
-    core.setOutput('valid_to', result.validTo);
-    core.setOutput('valid_from', result.validFrom);
+    core.setOutput('protocol', (result === null || result === void 0 ? void 0 : result.protocol) || 'unknown');
+    core.setOutput('valid_to', (result === null || result === void 0 ? void 0 : result.validTo) || 'unknown');
+    core.setOutput('valid_from', (result === null || result === void 0 ? void 0 : result.validFrom) || 'unknown');
     core.setOutput('error_message', errorMessage);
 }
 run();

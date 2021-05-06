@@ -40,17 +40,17 @@ async function run() {
     if (errorMessage) {
       await alerts.send(alertMethod as alerts.AlertMethod, alertToken, {
         domain,
-        validTo: result.validTo.toISOString(),
-        validFrom: result.validFrom.toISOString(),
-        protocol: result.protocol as tls.Protocol,
+        validTo: result?.validTo.toISOString() || 'unknown',
+        validFrom: result?.validFrom.toISOString() || 'unknown',
+        protocol: result?.protocol || 'unknown' as tls.Protocol,
         errorMessage
       });
     }
   }
 
-  core.setOutput('protocol', result.protocol);
-  core.setOutput('valid_to', result.validTo);
-  core.setOutput('valid_from', result.validFrom);
+  core.setOutput('protocol', result?.protocol || 'unknown');
+  core.setOutput('valid_to', result?.validTo || 'unknown');
+  core.setOutput('valid_from', result?.validFrom || 'unknown');
   core.setOutput('error_message', errorMessage);
 }
 
