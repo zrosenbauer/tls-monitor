@@ -1,4 +1,5 @@
 import * as slack from '../slack';
+import { Protocol } from '../../tls';
 
 const validTo = (new Date()).toISOString();
 const validFrom = (new Date()).toISOString();
@@ -10,7 +11,7 @@ describe('buildMessage', () => {
       errorMessage: 'An error of some kind',
       validTo,
       validFrom,
-      protocol: 'TLSv1.3'
+      protocol: 'TLSv1.3' as Protocol
     })).toEqual({
       icon_emoji: ':warning:',
       username: 'SSL/TLS Monitor',
