@@ -39,13 +39,6 @@ jobs:
         with:
           domain: https://not-a-real-domain-at-all-1382712984.com
           expiration_days: 7
-      - id: runActionInvalid
-        name: Try Invalid URL
-        uses: ./
-        continue-on-error: true
-        with:
-          domain: https://not-a-real-domain-at-all-1382712984.com
-          expiration_days: 7
       - run: echo ${{ steps.runActionInvalid.outputs.error_message }}
       - id: runActionInvalid2
         name: "Try Invalid URL from #24"
