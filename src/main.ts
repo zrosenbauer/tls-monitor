@@ -42,7 +42,7 @@ async function run() {
         domain,
         validTo: result?.validTo.toISOString() || 'unknown',
         validFrom: result?.validFrom.toISOString() || 'unknown',
-        protocol: result?.protocol || ('unknown' as tls.Protocol),
+        protocol: (result?.protocol || 'unknown') as tls.Protocol,
         errorMessage
       });
     }
