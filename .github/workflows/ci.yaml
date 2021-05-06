@@ -42,6 +42,6 @@ jobs:
           expiration_days: 7
       - id: invalidActionStatus
         name: Invalid URL Status
-        if: steps.runActionInvalid.status != "failure"
+        if: steps.runActionInvalid.outputs.error_message == ""
         run: exit 1
 
