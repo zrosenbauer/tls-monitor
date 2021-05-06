@@ -57,7 +57,7 @@ async function run() {
                 domain,
                 validTo: (result === null || result === void 0 ? void 0 : result.validTo.toISOString()) || 'unknown',
                 validFrom: (result === null || result === void 0 ? void 0 : result.validFrom.toISOString()) || 'unknown',
-                protocol: (result === null || result === void 0 ? void 0 : result.protocol) || 'unknown',
+                protocol: ((result === null || result === void 0 ? void 0 : result.protocol) || 'unknown'),
                 errorMessage
             });
         }
