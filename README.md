@@ -1,6 +1,7 @@
 # SSL/TLS Monitor
 
 [![CI](https://github.com/bluenovaio/action-tls-monitor/actions/workflows/ci.yaml/badge.svg)](https://github.com/bluenovaio/action-tls-monitor/actions/workflows/ci.yaml)
+[![CodeQL](https://github.com/bluenovaio/action-tls-monitor/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/bluenovaio/action-tls-monitor/actions/workflows/codeql-analysis.yml)
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/standard/semistandard)
 
 Monitor SSL/TLS certificates for your domains.
