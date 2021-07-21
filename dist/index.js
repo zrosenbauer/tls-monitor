@@ -22024,7 +22024,7 @@ module.exports = {
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"action-tls-monitor","version":"1.0.0","description":"Monitor SSL/TLS certificates for your domains.","main":"dist/main.js","repository":"git@github.com:bluenovaio/action-tls-monitor.git","author":"@bluenovaio","license":"MIT","private":false,"scripts":{"build":"tsc","format":"prettier --write **/*.ts","format-check":"prettier --check **/*.ts","lint":"eslint src/**/*.ts","package":"ncc build --source-map --license licenses.txt","test":"jest"},"dependencies":{"@actions/core":"^1.4.0","@slack/webhook":"^6.0.0","gaxios":"^4.3.0","lodash":"^4.17.21"},"devDependencies":{"@jest/types":"^27.0.6","@types/jest":"^26.0.20","@types/lodash":"^4.14.170","@types/node":"^16.0.0","@typescript-eslint/eslint-plugin":"^4.28.1","@typescript-eslint/parser":"^4.28.1","@vercel/ncc":"0.28.6","eslint":"^7.30.0","eslint-config-semistandard":"^16.0.0","eslint-config-standard":"^16.0.3","eslint-plugin-import":"^2.23.4","eslint-plugin-node":"^11.1.0","eslint-plugin-promise":"5.1.0","eslint-plugin-standard":"^5.0.0","jest":"^27.0.6","prettier":"^2.3.2","ts-jest":"^27.0.3","ts-node":"^10.0.0","typescript":"^4.3.5","webpack":"^5.42.0"}}');
+module.exports = JSON.parse('{"name":"action-tls-monitor","version":"1.0.0","description":"Monitor SSL/TLS certificates for your domains.","main":"dist/main.js","repository":"git@github.com:bluenovaio/action-tls-monitor.git","author":"@bluenovaio","license":"MIT","private":false,"scripts":{"build":"tsc","format":"prettier --write **/*.ts","format-check":"prettier --check **/*.ts","lint":"eslint src/**/*.ts","package":"ncc build --source-map --license licenses.txt","test":"jest"},"dependencies":{"@actions/core":"^1.4.0","@slack/webhook":"^6.0.0","gaxios":"^4.3.0","lodash":"^4.17.21"},"devDependencies":{"@jest/types":"^27.0.6","@types/jest":"^26.0.24","@types/lodash":"^4.14.171","@types/node":"^16.4.0","@typescript-eslint/eslint-plugin":"^4.28.4","@typescript-eslint/parser":"^4.28.4","@vercel/ncc":"0.29.0","eslint":"^7.31.0","eslint-config-semistandard":"^16.0.0","eslint-config-standard":"^16.0.3","eslint-plugin-import":"^2.23.4","eslint-plugin-node":"^11.1.0","eslint-plugin-promise":"5.1.0","eslint-plugin-standard":"^5.0.0","jest":"^27.0.6","prettier":"^2.3.2","ts-jest":"^27.0.3","ts-node":"^10.1.0","typescript":"^4.3.5","webpack":"^5.45.1"}}');
 
 /***/ }),
 
@@ -22032,7 +22032,7 @@ module.exports = JSON.parse('{"name":"action-tls-monitor","version":"1.0.0","des
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("assert");;
+module.exports = require("assert");
 
 /***/ }),
 
@@ -22040,7 +22040,7 @@ module.exports = require("assert");;
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("fs");;
+module.exports = require("fs");
 
 /***/ }),
 
@@ -22048,7 +22048,7 @@ module.exports = require("fs");;
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("http");;
+module.exports = require("http");
 
 /***/ }),
 
@@ -22056,7 +22056,7 @@ module.exports = require("http");;
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("https");;
+module.exports = require("https");
 
 /***/ }),
 
@@ -22064,7 +22064,7 @@ module.exports = require("https");;
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("os");;
+module.exports = require("os");
 
 /***/ }),
 
@@ -22072,7 +22072,7 @@ module.exports = require("os");;
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("path");;
+module.exports = require("path");
 
 /***/ }),
 
@@ -22080,7 +22080,7 @@ module.exports = require("path");;
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("stream");;
+module.exports = require("stream");
 
 /***/ }),
 
@@ -22088,7 +22088,7 @@ module.exports = require("stream");;
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("tty");;
+module.exports = require("tty");
 
 /***/ }),
 
@@ -22096,7 +22096,7 @@ module.exports = require("tty");;
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("url");;
+module.exports = require("url");
 
 /***/ }),
 
@@ -22104,7 +22104,7 @@ module.exports = require("url");;
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("util");;
+module.exports = require("util");
 
 /***/ }),
 
@@ -22112,7 +22112,7 @@ module.exports = require("util");;
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("zlib");;
+module.exports = require("zlib");
 
 /***/ })
 
@@ -22163,7 +22163,9 @@ module.exports = require("zlib");;
 /******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
-/******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";/************************************************************************/
+/******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
+/******/ 	
+/************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
