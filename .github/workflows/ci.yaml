@@ -15,10 +15,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v1
-      - name: Use Node.js v12
+      - name: Use Node.js v14
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
       - name: Install Packages
         run: yarn install
       - name: Format Check
