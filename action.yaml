@@ -29,7 +29,7 @@ outputs:
   error_message:
     description: A short description of the issue if an issue is found.
 runs:
-  using: node12
+  using: node16
   main: dist/index.js
 branding:
   color: blue

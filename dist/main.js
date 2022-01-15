@@ -39,11 +39,16 @@ async function run() {
         result = await tls.getTLSInfo(domain);
     }
     catch (err) {
-        errorMessage = err.message || `Unable to get TLS Info for domain ${domain}`;
+        if (err instanceof Error) {
+            errorMessage = err.message;
+        }
+        else {
+            errorMessage = `Unable to get TLS Info for domain ${domain}`;
+        }
     }
     if (isAlertEnabled) {
         if (result) {
-            const validationResults = validate_1.validate({
+            const validationResults = (0, validate_1.validate)({
                 expirationDays: Number(expirationDays),
                 approvedProtocols: getApprovedProtocols(approvedProtocols),
                 tlsInfo: result
