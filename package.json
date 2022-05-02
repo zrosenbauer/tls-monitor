@@ -22,7 +22,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@jest/types": "^27.4.2",
+    "@jest/types": "^28.0.2",
     "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "^17.0.8",
