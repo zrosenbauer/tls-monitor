@@ -16,7 +16,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@actions/core": "^1.4.0",
+    "@actions/core": "^1.9.1",
     "@slack/webhook": "^6.1.0",
     "gaxios": "^4.3.0",
     "lodash": "^4.17.21"
