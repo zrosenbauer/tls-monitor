@@ -17,10 +17,10 @@ describe('getTLSInfo', () => {
         countryName: 'US',
         locality: 'Los Angeles',
         stateOrProvince: 'California',
-        organization: 'Verizon Digital Media Services, Inc.',
+        organization: 'Internet Corporation for Assigned Names and Numbers',
         commonName: 'www.example.org'
       },
-      protocol: 'TLSv1.2',
+      protocol: 'TLSv1.3',
       validFrom: expect.any(Date),
       validTo: expect.any(Date),
     });
