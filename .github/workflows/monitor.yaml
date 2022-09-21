@@ -12,11 +12,11 @@ jobs:
     strategy:
       matrix:
         domain:
-          - bluenova.io
-          - docs.bluenova.io
+          - codereviews.ai
+          - docs.codereviews.ai
     steps:
       - name: Monitor - ${{ matrix.domain }}
-        uses: bluenovaio/action-tls-monitor@main
+        uses: zrosenbauer/action-tls-monitor@main
         with:
           domain: ${{ matrix.domain }}
           expiration_days: "7"
