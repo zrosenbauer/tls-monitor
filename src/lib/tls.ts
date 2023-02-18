@@ -110,7 +110,7 @@ export async function getTLSInfo (url: string): Promise<TLSInfo> {
     issuer: transformCertInfo(result.certificate.issuer),
     subject: transformCertInfo(result.certificate.subject),
     protocol: result.protocol,
-    validFrom: validFrom,
-    validTo: validTo
+    validFrom,
+    validTo
   };
 }

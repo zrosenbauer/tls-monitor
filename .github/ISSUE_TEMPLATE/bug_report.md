@@ -4,8 +4,8 @@ about: Create a bug report to fix an existing issue.
 title: ''
 labels: bugfix
 assignees: ''
-
 ---
+
 **Please do not report security vulnerabilities here**. Submit all security issues to [security@bluenova.io](mailto:security@bluenova.io).
 
 **Thank you in advance for helping us to improve this library!** Please read through the template below and answer all relevant questions. Your additional work here is greatly appreciated and will help us respond as quickly as possible. Finally, to avoid duplicates, please search existing Issues before submitting one here.

@@ -17,7 +17,7 @@ describe('getTLSInfo', () => {
         countryName: 'US',
         locality: 'Los Angeles',
         stateOrProvince: 'California',
-        organization: 'Internet Corporation for Assigned Names and Numbers',
+        organization: 'Internet Corporation for Assigned Names and Numbers',
         commonName: 'www.example.org'
       },
       protocol: 'TLSv1.3',

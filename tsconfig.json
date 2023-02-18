@@ -11,22 +11,11 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "baseUrl": ".",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "declaration": true,
     "outDir": "./dist"
   },
-  "typeRoots": [
-    "node_modules/@types"
-  ],
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules/**/*",
-    "**/__tests__/**",
-    "action.js"
-  ]
+  "typeRoots": ["node_modules/@types"],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/**/*", "**/__tests__/**", "action.js"]
 }
