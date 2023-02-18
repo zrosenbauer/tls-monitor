@@ -1,4 +1,4 @@
-name: "CI"
+name: 'CI'
 
 on:
   pull_request:
@@ -22,16 +22,18 @@ jobs:
       - name: Install Packages
         run: yarn install
       - name: Format Check
-        run: yarn format-check
+        run: yarn format:check
       - name: Lint
-        run: yarn lint
+        run: yarn lint:check
+      - name: Typecheck
+        run: yarn type:check
       - name: Test
         run: yarn test
       - id: runActionValid
         name: Try Valid URL
         uses: ./
         with:
-          domain: https://bluenova.io
+          domain: https://joggr.io
           expiration_days: 7
       - id: runActionInvalid
         name: Try Invalid URL

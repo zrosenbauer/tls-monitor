@@ -1,16 +1,16 @@
 name: SSL/TLS Monitor
 description: Monitor SSL/TLS certificates for your domains.
-author: "@bluenovaio"
+author: '@zrosenbauer'
 inputs:
   domain:
     description: The domain to monitor, i.e. example.com.
     required: true
   expiration_days:
     description: The number of days prior to expiration to trigger an alert, MUST be a valid integer.
-    default: "7"
+    default: '7'
     required: false
   approved_protocols:
-    description: (Optional) A common separted list of supported protocols, MUST be one of - SSLv3,TLSv1,TLSv1.1,TLSv1.2,TLSv1.3.
+    description: (Optional) A common separated list of supported protocols, MUST be one of - SSLv3,TLSv1,TLSv1.1,TLSv1.2,TLSv1.3.
     default: TLSv1.2,TLSv1.3
     required: false
   alert_method:
@@ -21,7 +21,7 @@ inputs:
     required: false
 outputs:
   protocol:
-    description: A common separted list of supported protocols - SSLv3, TLSv1, TLSv1.1, TLSv1.2 or TLSv1.3.
+    description: A common separated list of supported protocols - SSLv3, TLSv1, TLSv1.1, TLSv1.2 or TLSv1.3.
   valid_to:
     description: The validTo date for the certificate in ISO-8601 format (i.e. 2021-01-01T10:20:11Z).
   valid_from:

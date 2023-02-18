@@ -6,12 +6,8 @@ const config: Config.InitialOptions = {
       tsconfig: 'tsconfig.json'
     }
   },
-  testMatch: [
-    '**/__tests__/**/*.ts?(x)'
-  ],
-  testPathIgnorePatterns: [
-    'dist'
-  ],
+  testMatch: ['**/__tests__/**/*.ts?(x)'],
+  testPathIgnorePatterns: ['dist'],
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest'
   }
