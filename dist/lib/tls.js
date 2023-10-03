@@ -36,7 +36,7 @@ var Protocol;
     Protocol["TLSv1dot1"] = "TLSv1.1";
     Protocol["TLSv1dot2"] = "TLSv1.2";
     Protocol["TLSv1dot3"] = "TLSv1.3";
-})(Protocol = exports.Protocol || (exports.Protocol = {}));
+})(Protocol || (exports.Protocol = Protocol = {}));
 function getHttpsInfo(url, options = {
     timeout: 0,
     port: 443,
