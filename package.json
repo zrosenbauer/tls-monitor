@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.10.1",
-    "@slack/webhook": "^6.1.0",
+    "@slack/webhook": "^7.0.1",
     "gaxios": "^6.1.1",
     "lodash": "^4.17.21"
   },
