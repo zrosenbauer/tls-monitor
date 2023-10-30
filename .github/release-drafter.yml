@@ -19,6 +19,8 @@ categories:
     label: 'security'
   - title: '🤖 Dependabot'
     label: 'dependencies'
+exclude-labels:
+  - 'skip-changelog'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 template: |
   ## Changes

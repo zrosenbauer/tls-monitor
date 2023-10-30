@@ -2,7 +2,7 @@
   "name": "tls-monitor",
   "version": "1.0.0",
   "description": "Monitor SSL/TLS certificates for your domains.",
-  "main": "dist/main.js",
+  "main": "build/main.js",
   "repository": "git@github.com:zrosenbauer/tls-monitor.git",
   "author": "@zrosenbauer",
   "license": "MIT",
@@ -13,7 +13,7 @@
     "format:check": "prettier --check .",
     "lint:check": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
-    "package": "ncc build --source-map --license licenses.txt",
+    "package": "ncc build dist/main.js --source-map --license licenses.txt --out build",
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
@@ -27,8 +27,8 @@
     "@types/jest": "^29.5.6",
     "@types/lodash": "^4.14.200",
     "@types/node": "^20.8.9",
-    "@typescript-eslint/eslint-plugin": "^6.9.0",
-    "@typescript-eslint/parser": "^6.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
     "@vercel/ncc": "0.38.1",
     "eslint": "^8.52.0",
     "eslint-config-semistandard": "^17.0.0",
