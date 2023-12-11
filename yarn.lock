@@ -1237,13 +1237,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^29.5.6":
-  version: 29.5.6
-  resolution: "@types/jest@npm:29.5.6"
+"@types/jest@npm:^29.5.11":
+  version: 29.5.11
+  resolution: "@types/jest@npm:29.5.11"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: fa13a27bd1c8efd0381a419478769d0d6d3a8e93e1952d7ac3a16274e8440af6f73ed6f96ac1ff00761198badf2ee226b5ab5583a5d87a78d609ea78da5c5a24
+  checksum: f892a06ec9f0afa9a61cd7fa316ec614e21d4df1ad301b5a837787e046fcb40dfdf7f264a55e813ac6b9b633cb9d366bd5b8d1cea725e84102477b366df23fdd
   languageName: node
   linkType: hard
 
@@ -6138,7 +6138,7 @@ __metadata:
     "@actions/core": ^1.10.1
     "@jest/types": ^29.6.3
     "@slack/webhook": ^7.0.1
-    "@types/jest": ^29.5.6
+    "@types/jest": ^29.5.11
     "@types/lodash": ^4.14.200
     "@types/node": ^20.8.9
     "@typescript-eslint/eslint-plugin": ^6.9.1
