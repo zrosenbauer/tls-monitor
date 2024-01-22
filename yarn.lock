@@ -1282,12 +1282,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:>=18.0.0, @types/node@npm:^20.8.9":
+"@types/node@npm:>=18.0.0":
   version: 20.8.9
   resolution: "@types/node@npm:20.8.9"
   dependencies:
     undici-types: ~5.26.4
   checksum: 0c05f3502a9507ff27e91dd6fd574fa6f391b3fafedcfe8e0c8d33351fb22d02c0121f854e5b6b3ecb9a8a468407ddf6e7ac0029fb236d4c7e1361ffc758a01f
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.11.5":
+  version: 20.11.5
+  resolution: "@types/node@npm:20.11.5"
+  dependencies:
+    undici-types: ~5.26.4
+  checksum: a542727de1334ae20a3ca034b0ecf4b464a57ca01efc4f9cf43bd9ab93896125ab3c2de060ecd8f6ae23b86c6bf3463f681b643e69c032c6a662d376c98a6092
   languageName: node
   linkType: hard
 
@@ -6140,7 +6149,7 @@ __metadata:
     "@slack/webhook": ^7.0.1
     "@types/jest": ^29.5.6
     "@types/lodash": ^4.14.200
-    "@types/node": ^20.8.9
+    "@types/node": ^20.11.5
     "@typescript-eslint/eslint-plugin": ^6.9.1
     "@typescript-eslint/parser": ^6.9.1
     "@vercel/ncc": 0.38.1
