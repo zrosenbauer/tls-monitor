@@ -11,7 +11,7 @@ describe('getTLSInfo', () => {
         locality: undefined,
         organization: 'DigiCert Inc',
         stateOrProvince: undefined,
-        commonName: 'DigiCert TLS RSA SHA256 2020 CA1'
+        commonName: 'DigiCert Global G2 TLS RSA SHA256 2020 CA1'
       },
       subject: {
         countryName: 'US',
