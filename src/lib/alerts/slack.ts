@@ -1,8 +1,11 @@
-import { IncomingWebhook, IncomingWebhookSendArguments } from '@slack/webhook';
+import {
+  IncomingWebhook,
+  type IncomingWebhookSendArguments
+} from '@slack/webhook';
 
-import { AlertInput } from './types';
+import type { AlertInput } from './types';
 
-export function buildMessage (input: AlertInput): IncomingWebhookSendArguments {
+export function buildMessage(input: AlertInput): IncomingWebhookSendArguments {
   return {
     icon_emoji: ':warning:',
     username: 'SSL/TLS Monitor',
@@ -49,10 +52,11 @@ export function buildMessage (input: AlertInput): IncomingWebhookSendArguments {
   };
 }
 
-export async function send (webhookUrl: string, input: AlertInput): Promise<void> {
+export async function send(
+  webhookUrl: string,
+  input: AlertInput
+): Promise<void> {
   const webhook = new IncomingWebhook(webhookUrl);
 
-  await webhook.send(
-    buildMessage(input)
-  );
+  await webhook.send(buildMessage(input));
 }

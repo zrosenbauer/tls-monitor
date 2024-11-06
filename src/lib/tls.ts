@@ -1,5 +1,5 @@
-import { PeerCertificate, TLSSocket, Certificate } from 'tls';
-import https from 'https';
+import https from 'node:https';
+import type { Certificate, PeerCertificate, TLSSocket } from 'node:tls';
 import * as _ from 'lodash';
 
 export enum Protocol {
@@ -7,7 +7,7 @@ export enum Protocol {
   TLSv1 = 'TLSv1',
   TLSv1dot1 = 'TLSv1.1',
   TLSv1dot2 = 'TLSv1.2',
-  TLSv1dot3 = 'TLSv1.3',
+  TLSv1dot3 = 'TLSv1.3'
 }
 
 interface HttpsInfoOption {
@@ -22,7 +22,7 @@ interface HttpsInfo {
   protocol: Protocol | null;
 }
 
-function getHttpsInfo (
+function getHttpsInfo(
   url: string,
   options: HttpsInfoOption = {
     timeout: 0,
@@ -32,35 +32,40 @@ function getHttpsInfo (
   }
 ): Promise<HttpsInfo> {
   return new Promise((resolve, reject) => {
-    const req = https.get({
-      hostname: url,
-      agent: false,
-      rejectUnauthorized: false,
-      ciphers: 'ALL',
-      port: options.port,
-      protocol: options.protocol
-    }, (res) => {
-      const certificate = (res.socket as TLSSocket).getPeerCertificate(options.detailed);
-      const protocol = (res.socket as TLSSocket).getProtocol() as Protocol;
+    const req = https.get(
+      {
+        hostname: url,
+        agent: false,
+        rejectUnauthorized: false,
+        ciphers: 'ALL',
+        port: options.port,
+        protocol: options.protocol
+      },
+      res => {
+        const certificate = (res.socket as TLSSocket).getPeerCertificate(
+          options.detailed
+        );
+        const protocol = (res.socket as TLSSocket).getProtocol() as Protocol;
 
-      if (_.isEmpty(certificate) || _.isNil(certificate)) {
-        reject(new Error('The URL did not provide a certificate'));
-      } else {
-        resolve({
-          certificate,
-          protocol
-        });
+        if (_.isEmpty(certificate) || _.isNil(certificate)) {
+          reject(new Error('The URL did not provide a certificate'));
+        } else {
+          resolve({
+            certificate,
+            protocol
+          });
+        }
       }
-    });
+    );
 
     if (options.timeout) {
-      req.setTimeout(options.timeout, function () {
+      req.setTimeout(options.timeout, () => {
         reject(new Error('Request timed out'));
         req.destroy();
       });
     }
 
-    req.on('error', function (e) {
+    req.on('error', e => {
       reject(e);
     });
 
@@ -76,7 +81,7 @@ interface SSLCertInfo {
   commonName: string;
 }
 
-function transformCertInfo (sslCertInfo: Certificate): SSLCertInfo {
+function transformCertInfo(sslCertInfo: Certificate): SSLCertInfo {
   return {
     countryName: sslCertInfo.C,
     locality: sslCertInfo.L,
@@ -86,7 +91,7 @@ function transformCertInfo (sslCertInfo: Certificate): SSLCertInfo {
   };
 }
 
-function toDate (dateString: string): Date {
+function toDate(dateString: string): Date {
   return new Date(dateString);
 }
 
@@ -101,7 +106,7 @@ export interface TLSInfo {
   validTo: Date;
 }
 
-export async function getTLSInfo (url: string): Promise<TLSInfo> {
+export async function getTLSInfo(url: string): Promise<TLSInfo> {
   const result = await getHttpsInfo(url);
   const validFrom = toDate(result.certificate.valid_from);
   const validTo = toDate(result.certificate.valid_to);

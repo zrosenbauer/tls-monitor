@@ -1,23 +1,13 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
-  "extends": [
-    "@tsconfig/recommended"
-  ],
+  "extends": ["@tsconfig/recommended"],
   "compilerOptions": {
     "module": "commonjs",
     "baseUrl": ".",
     "declaration": true,
     "outDir": "./dist",
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "typeRoots": ["node_modules/@types"]
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules/**/*",
-    "**/__tests__/**",
-    "action.js"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/**/*", "**/__tests__/**", "action.js"]
 }

@@ -1,20 +1,22 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
+import type { Protocol } from '../../tls';
 import * as slack from '../slack';
-import { Protocol } from '../../tls';
 
-const validTo = (new Date()).toISOString();
-const validFrom = (new Date()).toISOString();
+const validTo = new Date().toISOString();
+const validFrom = new Date().toISOString();
 
 describe('buildMessage', () => {
   it('returns a built message', () => {
-    expect(slack.buildMessage({
-      domain: 'example.com',
-      errorMessage: 'An error of some kind',
-      validTo,
-      validFrom,
-      protocol: 'TLSv1.3' as Protocol
-    })).toEqual({
+    expect(
+      slack.buildMessage({
+        domain: 'example.com',
+        errorMessage: 'An error of some kind',
+        validTo,
+        validFrom,
+        protocol: 'TLSv1.3' as Protocol
+      })
+    ).toEqual({
       icon_emoji: ':warning:',
       username: 'SSL/TLS Monitor',
       blocks: [

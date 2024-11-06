@@ -6,8 +6,8 @@ export default defineConfig({
     coverage: {
       provider: 'istanbul',
       reporter: ['html', 'text-summary', 'lcovonly'],
-      all: true,
+      all: true
     },
-    testTimeout: 15000,
-  },
+    testTimeout: 15000
+  }
 });
