@@ -14,29 +14,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v1
-      - name: Use Node.js v16
-        uses: actions/setup-node@v1
+        uses: actions/checkout@v4
+      - name: Use Node.js v22
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 22
       - name: Install Packages
         run: yarn install
-      - name: Format Check
-        run: yarn format:check
-      - name: Lint
-        run: yarn lint:check
-      - name: Typecheck
-        run: yarn type:check
+      - name: Linting & Formatting
+        run: yarn analyze:ci
+      - name: Type Checking
+        run: yarn analyze:types
   test:
     name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v1
-      - name: Use Node.js v16
-        uses: actions/setup-node@v1
+        uses: actions/checkout@v4
+      - name: Use Node.js v22
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 22
       - name: Install Packages
         run: yarn install
       - name: Test
