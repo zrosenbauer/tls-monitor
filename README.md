@@ -11,8 +11,8 @@
 
 [![CI](https://github.com/zrosenbauer/tls-monitor/actions/workflows/ci.yaml/badge.svg)](https://github.com/zrosenbauer/tls-monitor/actions/workflows/ci.yaml)
 [![CodeQL](https://github.com/zrosenbauer/tls-monitor/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/zrosenbauer/tls-monitor/actions/workflows/codeql-analysis.yml)
-[![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/standard/semistandard)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![Formatted with Biome](https://img.shields.io/badge/Formatted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev/)
+[![Linted with Biome](https://img.shields.io/badge/Linted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
 
 Monitor SSL/TLS certificates for your domains.
 
