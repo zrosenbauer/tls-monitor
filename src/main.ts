@@ -1,8 +1,8 @@
 import * as core from '@actions/core';
 
 import * as alerts from './lib/alerts/main';
-import { validate } from './lib/validate';
 import * as tls from './lib/tls';
+import { validate } from './lib/validate';
 
 function getApprovedProtocols(approvedProtocols: string) {
   return approvedProtocols.split(',') as tls.Protocol[];
@@ -17,7 +17,7 @@ async function run() {
   const isAlertEnabled = !!alertMethod;
 
   let errorMessage = '';
-  let result;
+  let result: tls.TLSInfo | undefined;
   try {
     result = await tls.getTLSInfo(domain);
   } catch (err) {

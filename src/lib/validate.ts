@@ -1,4 +1,4 @@
-import { TLSInfo, Protocol } from './tls';
+import type { Protocol, TLSInfo } from './tls';
 
 interface ValidationInput {
   expirationDays: number;
@@ -13,18 +13,21 @@ interface ValidationResult {
   errorMessage: string | null;
 }
 
-export function getDaysBetweenDates (date1: Date, date2: Date): number {
+export function getDaysBetweenDates(date1: Date, date2: Date): number {
   const difference = date1.getTime() - date2.getTime();
   return Math.ceil(difference / (1000 * 60 * 60 * 24));
 }
 
-export function validate (input: ValidationInput): ValidationResult {
+export function validate(input: ValidationInput): ValidationResult {
   const errors: string[] = [];
   let protocolNotApproved = false;
   let expired = false;
   let expiresSoon = false;
 
-  if (!input.tlsInfo.protocol || !input.approvedProtocols.includes(input.tlsInfo.protocol)) {
+  if (
+    !input.tlsInfo.protocol ||
+    !input.approvedProtocols.includes(input.tlsInfo.protocol)
+  ) {
     errors.push(`Invalid protocol: ${input.tlsInfo.protocol || 'unknown'}`);
     protocolNotApproved = true;
   }
@@ -34,8 +37,14 @@ export function validate (input: ValidationInput): ValidationResult {
     expired = true;
   }
 
-  if (!expired && getDaysBetweenDates(input.tlsInfo.validTo, new Date()) <= input.expirationDays) {
-    errors.push(`Certificate will expire in less than ${input.expirationDays} days`);
+  if (
+    !expired &&
+    getDaysBetweenDates(input.tlsInfo.validTo, new Date()) <=
+      input.expirationDays
+  ) {
+    errors.push(
+      `Certificate will expire in less than ${input.expirationDays} days`
+    );
     expiresSoon = true;
   }
 
@@ -43,6 +52,8 @@ export function validate (input: ValidationInput): ValidationResult {
     expired,
     expiresSoon,
     protocolNotApproved,
-    errorMessage: errors.length ? `Issues found with certificate - ${errors.join(', ')}` : null
+    errorMessage: errors.length
+      ? `Issues found with certificate - ${errors.join(', ')}`
+      : null
   };
 }

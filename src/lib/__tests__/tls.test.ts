@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import * as tls from '../tls';
 
 describe('getTLSInfo', () => {
@@ -22,7 +24,7 @@ describe('getTLSInfo', () => {
       },
       protocol: 'TLSv1.3',
       validFrom: expect.any(Date),
-      validTo: expect.any(Date),
+      validTo: expect.any(Date)
     });
 
     expect(result.validFrom.getTime()).toBeLessThan(Date.now());
