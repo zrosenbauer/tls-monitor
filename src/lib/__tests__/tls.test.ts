@@ -13,14 +13,14 @@ describe('getTLSInfo', () => {
         locality: undefined,
         organization: 'DigiCert Inc',
         stateOrProvince: undefined,
-        commonName: 'DigiCert Global G2 TLS RSA SHA256 2020 CA1'
+        commonName: 'DigiCert Global G3 TLS ECC SHA384 2020 CA1'
       },
       subject: {
         countryName: 'US',
         locality: 'Los Angeles',
         stateOrProvince: 'California',
-        organization: 'Internet Corporation for Assigned Names and Numbers',
-        commonName: 'www.example.org'
+        organization: 'Internet Corporation for Assigned Names and Numbers',
+        commonName: '*.example.com'
       },
       protocol: 'TLSv1.3',
       validFrom: expect.any(Date),

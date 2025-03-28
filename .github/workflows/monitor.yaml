@@ -12,8 +12,8 @@ jobs:
     strategy:
       matrix:
         domain:
-          - codereviews.ai
-          - docs.codereviews.ai
+          - joggr.io
+          - docs.joggr.io
     steps:
       - name: Monitor - ${{ matrix.domain }}
         uses: zrosenbauer/action-tls-monitor@main
