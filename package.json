@@ -25,7 +25,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@tsconfig/recommended": "^1.0.8",
-    "@types/lodash": "^4.17.16",
+    "@types/lodash": "^4.17.18",
     "@types/node": "^22.13.14",
     "@vercel/ncc": "0.38.3",
     "ts-node": "^10.9.2",
